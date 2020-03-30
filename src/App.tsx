@@ -1,12 +1,14 @@
 import React from 'react';
-import './App.css';
-import LoginScreen from "./component/Login-Screen";
-import LoggedIn from "./component/LoggedIn";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
+
+import './App.css';
+
 import LoginReducer  from './store/LoginReducer';
-import AuthorizedRoute from './component/AuthorizedRoute';
+import LoggedIn from "./component/LoggedIn.connected";
+import LoginScreen from "./component/Login-Screen.connected";
+import AuthorizedRoute from './component/AuthorizedRoute.connected';
 
 const myStore = createStore(LoginReducer);
 

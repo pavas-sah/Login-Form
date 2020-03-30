@@ -1,13 +1,13 @@
-import React from 'react';
-import { connect } from "react-redux";
+import React, { Dispatch } from 'react';
 import { RouteComponentProps } from "react-router-dom";
+import { Action } from 'redux';
 
-interface IProps extends RouteComponentProps{
-    onValidUser(): any,
-    onInvalidUser(): any
+export interface IProps extends RouteComponentProps{
+    onValidUser(): Dispatch<Action>,
+    onInvalidUser(): Dispatch<Action>
    }
 
-const LoggedIn = (props:IProps) => {
+export const LoggedIn = (props:IProps) => {
     return (
         <div>
             <button onClick = {props.onInvalidUser}>LogOut</button>
@@ -16,11 +16,3 @@ const LoggedIn = (props:IProps) => {
     )
     
 }
-
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        onInvalidUser: () => dispatch({ type: 'LOGOUT' }),
-    };
-};
-
-export default connect(null, mapDispatchToProps)(LoggedIn); 

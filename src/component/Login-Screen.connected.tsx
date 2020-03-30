@@ -1,12 +1,19 @@
 import { connect } from "react-redux";
 import { LoginScreen} from "./Login-Screen";
+import { IGlobalState } from "../store/LoginReducer";
+import { IProps } from "./AuthorizedRoute";
+import { LoginState } from "../store/LoginReducer.action";
 
-
-const mapDispatchToProps = (dispatch: any) => {
+const mapStateToProps = (globalState: IGlobalState, props:IProps) => {
     return {
-        onValidUser: () => dispatch({ type: 'LOGIN' }),
-        // onInvalidUser: () => dispatch({ type: 'LOGOUT' }),
+        isAuthenticated : globalState.isAuthenticated,
     };
 };
 
-export default connect (null, mapDispatchToProps)(LoginScreen);
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        onValidUser: () => dispatch({ type: LoginState.LOGIN }),
+    };
+};
+
+export default connect (mapStateToProps, mapDispatchToProps)(LoginScreen);

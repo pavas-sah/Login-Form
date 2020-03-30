@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect, RouteComponentProps } from "react-router-dom";
 import "./Login.css";
-import { connect } from "react-redux";
+import { IGlobalState } from "../store/LoginReducer";
 
 export interface IState {
     user: string,
@@ -17,7 +17,7 @@ export interface IProps extends RouteComponentProps {
     onInvalidUser(): any
 }
 
-export class LoginScreen extends Component<IProps, IState> {
+export class LoginScreen extends Component<IProps & IGlobalState, IState> {
     state: IState = {
         user: '',
         pass: '',
@@ -26,13 +26,6 @@ export class LoginScreen extends Component<IProps, IState> {
         isUserValid: true,
         errorMessage: ""
     };
-
-    // componentWillUpdate()
-    // {
-    //     debugger;
-    //     return true;
-
-    // }
 
     validEmailRegex = RegExp(
         // eslint-disable-next-line
@@ -43,7 +36,6 @@ export class LoginScreen extends Component<IProps, IState> {
 
     handleUserId = (e: any) => {
 
-        // let errors = this.state.errors;
         this.setState({
             user: e.target.value,
             errorMessage: "",
@@ -53,7 +45,6 @@ export class LoginScreen extends Component<IProps, IState> {
 
     handlePassword = (e: any) => {
 
-        // let errors = this.state.errors;
         this.setState({
             pass: e.target.value,
             isPassValid: this.validPasswordRegex.test(e.target.value),
@@ -69,6 +60,8 @@ export class LoginScreen extends Component<IProps, IState> {
                 errorMessage: ""
             })
             this.props.onValidUser();
+            console.log(this.props.isAuthenticated  )
+            this.props.history.push('/login');
         } else {
             this.setState({ errorMessage: "Invalid User Id/Password" });
         }
@@ -120,13 +113,3 @@ export class LoginScreen extends Component<IProps, IState> {
         );
     }
 }
-
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        onValidUser: () => dispatch({ type: 'LOGIN' }),
-        // onInvalidUser: () => dispatch({ type: 'LOGOUT' }),
-    };
-};
-
-export default connect (null, mapDispatchToProps)(LoginScreen);
-
