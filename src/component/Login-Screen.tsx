@@ -1,12 +1,11 @@
-import React, { Component } from "react";
-import { Redirect, RouteComponentProps } from "react-router-dom";
+import React, { Component, SyntheticEvent } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import "./Login.css";
 import { IGlobalState } from "../store/LoginReducer";
 
 export interface IState {
     user: string,
     pass: string,
-    toSuccess: boolean,
     isUserValid: boolean,
     isPassValid: boolean,
     errorMessage: string
@@ -21,7 +20,6 @@ export class LoginScreen extends Component<IProps & IGlobalState, IState> {
     state: IState = {
         user: '',
         pass: '',
-        toSuccess: false,
         isPassValid: true,
         isUserValid: true,
         errorMessage: ""
@@ -43,8 +41,9 @@ export class LoginScreen extends Component<IProps & IGlobalState, IState> {
         });
     }
 
-    handlePassword = (e: any) => {
+    handlePassword = (e: SyntheticEvent) => {
 
+        debugger;
         this.setState({
             pass: e.target.value,
             isPassValid: this.validPasswordRegex.test(e.target.value),
@@ -56,11 +55,9 @@ export class LoginScreen extends Component<IProps & IGlobalState, IState> {
         form.preventDefault();
         if (this.state.user === "pavas.sah@gmail.com" && this.state.pass === "pass") {
             this.setState({
-                toSuccess: true,
                 errorMessage: ""
             })
             this.props.onValidUser();
-            console.log(this.props.isAuthenticated  )
             this.props.history.push('/login');
         } else {
             this.setState({ errorMessage: "Invalid User Id/Password" });
@@ -83,9 +80,6 @@ export class LoginScreen extends Component<IProps & IGlobalState, IState> {
 
     render() {
 
-        if (this.state.toSuccess === true) {
-            return <Redirect to='/logged-in' />
-        }
 
         return (
             <div className="main-container">

@@ -1,11 +1,10 @@
 import { IGlobalState } from "../store/LoginReducer";
-import { IProps, AuthorizedRoute } from "./AuthorizedRoute";
+import { AuthorizedRoute } from "./AuthorizedRoute";
 import { connect } from "react-redux";
 
-const mapStateToProps = (globalState: IGlobalState, props:IProps) => {
+const mapStateToProps = (globalState: IGlobalState) => {
     return {
         isAuthenticated : globalState.isAuthenticated,
-        counter: globalState.counter
     };
 };
 
