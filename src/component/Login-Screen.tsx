@@ -1,4 +1,4 @@
-import React, { Component, SyntheticEvent } from "react";
+import React, { Component } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import "./Login.css";
 import { IGlobalState } from "../store/LoginReducer";
@@ -32,7 +32,7 @@ export class LoginScreen extends Component<IProps & IGlobalState, IState> {
     validPasswordRegex =
         RegExp(/^[0-9a-zA-Z]*$/);
 
-    handleUserId = (e: any) => {
+    handleUserId = (e: React.ChangeEvent<HTMLInputElement>) => {
 
         this.setState({
             user: e.target.value,
@@ -41,7 +41,7 @@ export class LoginScreen extends Component<IProps & IGlobalState, IState> {
         });
     }
 
-    handlePassword = (e: SyntheticEvent) => {
+    handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
 
         debugger;
         this.setState({
