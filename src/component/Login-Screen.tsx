@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { RouteComponentProps } from "react-router-dom";
-import "./Login.css";
+import { RouteComponentProps, RouteChildrenProps } from "react-router-dom";
 import { IGlobalState } from "../store/LoginReducer";
 
 export interface IState {
@@ -11,9 +10,11 @@ export interface IState {
     errorMessage: string
 }
 
-export interface IProps extends RouteComponentProps {
+export interface IProps {
     onValidUser(): any,
-    onInvalidUser(): any
+    onInvalidUser(): any,
+    // history(): { push:  } 
+    push(path:string):any
 }
 
 export class LoginScreen extends Component<IProps & IGlobalState, IState> {
@@ -43,7 +44,6 @@ export class LoginScreen extends Component<IProps & IGlobalState, IState> {
 
     handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-        debugger;
         this.setState({
             pass: e.target.value,
             isPassValid: this.validPasswordRegex.test(e.target.value),
@@ -58,7 +58,7 @@ export class LoginScreen extends Component<IProps & IGlobalState, IState> {
                 errorMessage: ""
             })
             this.props.onValidUser();
-            this.props.history.push('/login');
+            this.props.push('/login');
         } else {
             this.setState({ errorMessage: "Invalid User Id/Password" });
         }

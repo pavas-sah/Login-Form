@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoggedIn Page matches snapshot 1`] = `
+<div>
+  <button
+    data-testid="button"
+    onClick={[MockFunction]}
+  >
+    LogOut
+  </button>
+  User Logged In Successfully.
+</div>
+`;

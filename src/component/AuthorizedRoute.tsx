@@ -12,9 +12,9 @@ export class AuthorizedRoute extends React.Component<IProps & IGlobalState>{
     render() {
         const { component: Component, ...rest } = this.props
         return (
-            <Route {...rest} render={props => {
+            <Route  {...rest} render={() => {
                 return this.props.isAuthenticated !== undefined && this.props.isAuthenticated
-                    ? < Component {...this.props} />
+                    ? < Component data-testid="comp" {...this.props} />
                     : <Redirect to="/" />
             }} />
         )

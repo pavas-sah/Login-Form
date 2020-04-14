@@ -1,16 +1,14 @@
 import React, { Dispatch } from 'react';
-import { RouteComponentProps } from "react-router-dom";
 import { Action } from 'redux';
 
-export interface IProps extends RouteComponentProps{
-    onValidUser(): Dispatch<Action>,
+export interface IProps {
     onInvalidUser(): Dispatch<Action>
    }
 
-export const LoggedIn = (props:IProps) => {
+export const LoggedIn = (isValidUser:(IProps)) => {
     return (
         <div>
-            <button onClick = {props.onInvalidUser}>LogOut</button>
+            <button data-testid="button" onClick = {isValidUser.onInvalidUser}>LogOut</button>
             User Logged In Successfully.
         </div>
     )

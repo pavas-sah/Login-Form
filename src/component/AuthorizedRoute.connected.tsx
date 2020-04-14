@@ -2,7 +2,7 @@ import { IGlobalState } from "../store/LoginReducer";
 import { AuthorizedRoute } from "./AuthorizedRoute";
 import { connect } from "react-redux";
 
-const mapStateToProps = (globalState: IGlobalState) => {
+export const mapStateToProps = (globalState: IGlobalState) => {
     return {
         isAuthenticated : globalState.isAuthenticated,
     };
